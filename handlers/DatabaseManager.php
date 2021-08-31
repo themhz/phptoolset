@@ -14,9 +14,9 @@ class DatabaseManager{
     }
 
     public function uploadToFtp(){
-        $ftp = new Ftp("ftp.fcmsoft.com");
+        $ftp = new Ftp(CONFIG["ftp.host"]);
 
-        $dir    = 'C:\wamp64\www\phptoolset\database\dumps\\';
+        $dir    = CONFIG["dumpfiles"];
         $files = scandir($dir);
 
         foreach ($files as $file) {
@@ -44,12 +44,12 @@ class DatabaseManager{
         $sth = $db->dbh->prepare($sql);
         $sth->execute();
         $results = $sth->fetchAll(\PDO::FETCH_OBJ);
-        $location = "C:\\wamp64\www\phptoolset\\database\\dumps\\";
+        $location = CONFIG["dumpfiles"];
         foreach($results as $schema){
             echo "backing up ".$schema->Database."\n";
             $database = $schema->Database;
             if(!in_array($database, array("information_schema", "mysql", "performance_schema"))){
-                exec("C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=$location".$database."-".$date->format('Ymd_H_i_s').".sql $schema->Database");
+                exec(CONFIG["mysqlexe"]."mysqldump --user=root --password= --result-file=$location".$database."-".$date->format('Ymd_H_i_s').".sql $schema->Database");
             }
         }
 
@@ -78,7 +78,6 @@ class DatabaseManager{
         $date = new \DateTime();
         $db = Database::getInstance();
 
-        //$dir    = 'C:\wamp64\www\phptoolset\database\dumps\\';
         $files1 = scandir($dir);
 
         foreach ($files1 as $file){
@@ -91,12 +90,12 @@ class DatabaseManager{
                     $sth->execute();
 
                     $mysqlDatabaseName =$fileparts[0];
-                    $mysqlUserName ='root';
-                    $mysqlPassword ='';
-                    $mysqlHostName ='localhost';
+                    $mysqlUserName =CONFIG['db.user'];
+                    $mysqlPassword =CONFIG['db.password'];;
+                    $mysqlHostName =CONFIG['db.host'];
                     $mysqlImportFilename =$dir.$file;
 
-                    $command='C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysql -h' .$mysqlHostName .' -u' .$mysqlUserName .' ' .$mysqlDatabaseName .' < ' .$mysqlImportFilename;
+                    $command=CONFIG['mysqlexe'].'mysql -h' .$mysqlHostName .' -u' .$mysqlUserName .' ' .$mysqlDatabaseName .' < ' .$mysqlImportFilename;
                     exec($command,$output,$worked);
                     switch($worked){
                         case 0:

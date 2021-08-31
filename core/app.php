@@ -62,7 +62,7 @@ class App
                                 break;
                             case 'restore':
                                 echo "doing restore..\n";
-                                $dbManager->restoreDumps('C:\wamp64\www\phptoolset\database\dumps\\');
+                                $dbManager->restoreDumps(CONFIG['dumpfiles']);
                                 break;
                             case 'upload':
                                 echo "uploading\n";
@@ -70,20 +70,20 @@ class App
                                 break;
                             case 'deleteremote':
                                 echo 'deleting remote files';
-                                $ftp= new Ftp("ftp.fcmsoft.com");
+                                $ftp= new Ftp(CONFIG['ftp.host']);
                                 $ftp->deleteRemoteFiles();
                                 break;
                             case 'deletelocal':
                                 echo 'deleting local files';
-                                $fileSystem = new FileSystem("C:\wamp64\www\phptoolset\database\dumps\\");
+                                $fileSystem = new FileSystem(CONFIG['dumpfiles']);
                                 print_r($fileSystem->dirdelete());
                                 break;
                             case 'backup':
                                 echo 'doing backup';
 
-                                $fileSystem = new FileSystem("C:\wamp64\www\phptoolset\database\dumps\\");
+                                $fileSystem = new FileSystem(CONFIG['dumpfiles']);
                                 $fileSystem->dirdelete();
-                                $ftp= new Ftp("ftp.fcmsoft.com");
+                                $ftp= new Ftp(CONFIG['ftp.host']);
                                 $ftp->deleteRemoteFiles();
 
                                 $dbManager->exportDumps();

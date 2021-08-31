@@ -16,7 +16,7 @@ class Ftp{
         $this->server = $server;
         //$this->conn = $conn;
         $this->conn = ftp_connect($server) or die("Could not connect to $server");
-        $this->login = ftp_login($this->conn, "hal9000@fcmsoft.com", "ethe526996####");
+        $this->login = ftp_login($this->conn, CONFIG['ftp.user'], CONFIG['ftp.password']);
     }
 
     public function localFile($file){
