@@ -39,6 +39,16 @@ class FileSystem
         return copy($source, $destination);
     }
 
+    public function copydirs($src, $dest){
+        $time_start = hrtime(true);
+        shell_exec("xcopy $src $dest /E/H");
+        $time_end = hrtime(true);
+        $time = $time_end - $time_start;
+
+
+        echo "\n Copy Paste completed! in $time \n";
+    }
+
     public function directoryName($source)
     {
         return dirname($source);

@@ -18,10 +18,12 @@
  */
 
 namespace phptools\core;
+
 use phptools\handlers\FileSystem;
 use phptools\handlers\Ftp;
-use phptools\handlers\Database;
 use phptools\handlers\DatabaseManager;
+use phptools\handlers\Wamp;
+
 class App
 {
     public $config = CONFIG;
@@ -95,6 +97,17 @@ class App
                         }
                     }else{
                         $this->showdatabasemenu();
+                    }
+                    break;
+                case 'wamp':
+                    if(!empty($argv[2])) {
+                        switch ($argv[2]) {
+                            case 'backup':
+                                echo 'doing wamp backup';
+                                $wamp = new Wamp();
+                                $wamp->backup("C:\\wamp64\\www", "C:\\Users\\themhz\\Documents\\codebase\\", $this);
+                                break;
+                        }
                     }
                     break;
                 default:
