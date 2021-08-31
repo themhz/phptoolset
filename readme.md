@@ -1,6 +1,7 @@
 PHP toolset  
+Basic usage to backup the mysql database from your local machine and upload it to a remote ftp  
 Contains some primitive handlers like database, ftp and local file management.
-You use the command line to backup your database and store it to a remote ftp
+
 
 Commands you can use from the command line 
 
