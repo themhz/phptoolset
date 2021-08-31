@@ -44,7 +44,7 @@ class App
      */
     public function start()
     {
-        $dbManager = new DatabaseManager();
+        $dbManager = new DatabaseManager($this);
         global $argv;
 
         if(!empty($argv[1])){
@@ -70,24 +70,25 @@ class App
                                 break;
                             case 'deleteremote':
                                 echo 'deleting remote files';
-                                $ftp= new Ftp(CONFIG['ftp.host']);
+                                $ftp= new Ftp(CONFIG['ftp.host'], $this);
                                 $ftp->deleteRemoteFiles();
                                 break;
                             case 'deletelocal':
                                 echo 'deleting local files';
-                                $fileSystem = new FileSystem(CONFIG['dumpfiles']);
+                                $fileSystem = new FileSystem(CONFIG['dumpfiles'], $this);
                                 print_r($fileSystem->dirdelete());
                                 break;
                             case 'backup':
                                 echo 'doing backup';
-
-                                $fileSystem = new FileSystem(CONFIG['dumpfiles']);
+                                $this->log("Doing backup  \n");
+                                $fileSystem = new FileSystem(CONFIG['dumpfiles'], $this);
                                 $fileSystem->dirdelete();
-                                $ftp= new Ftp(CONFIG['ftp.host']);
+                                $ftp= new Ftp(CONFIG['ftp.host'], $this);
                                 $ftp->deleteRemoteFiles();
 
                                 $dbManager->exportDumps();
                                 $dbManager->uploadToFtp();
+                                $this->log("--------------------------end backup-----------------------\n");
                                 break;
                             default:
                                 $this->showdatabasemenu();
@@ -113,6 +114,11 @@ class App
     public function showmenu(){
 
         echo "Please an option {backup, export, drop, restore}";
+    }
+
+    public function log($log){
+        file_put_contents('./logs/log_'.date("j.n.Y").'.log', $log, FILE_APPEND);
+
     }
 
 

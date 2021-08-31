@@ -8,13 +8,15 @@ use phptools\handlers\Ftp;
 class DatabaseManager{
 
     private $db;
-    public function __construct()
+    private $app;
+    public function __construct($app)
     {
         $this->db = Database::getInstance();
+        $this->app = $app;
     }
 
     public function uploadToFtp(){
-        $ftp = new Ftp(CONFIG["ftp.host"]);
+        $ftp = new Ftp(CONFIG["ftp.host"], $this->app);
 
         $dir    = CONFIG["dumpfiles"];
         $files = scandir($dir);
@@ -47,8 +49,10 @@ class DatabaseManager{
         $location = CONFIG["dumpfiles"];
         foreach($results as $schema){
             echo "backing up ".$schema->Database."\n";
+            $this->app->log("backing up ".$schema->Database."\n");
             $database = $schema->Database;
             if(!in_array($database, array("information_schema", "mysql", "performance_schema"))){
+                $this->app->log(CONFIG["mysqlexe"]."mysqldump --user=root --password= --result-file=$location".$database."-".$date->format('Ymd_H_i_s').".sql $schema->Database \n");
                 exec(CONFIG["mysqlexe"]."mysqldump --user=root --password= --result-file=$location".$database."-".$date->format('Ymd_H_i_s').".sql $schema->Database");
             }
         }
@@ -65,6 +69,7 @@ class DatabaseManager{
         foreach($results as $schema){
             if(!in_array($schema->Database, array("information_schema", "mysql", "performance_schema"))){
                 echo "dropping ".$schema->Database."\n";
+                $this->app->log("dropping ".$schema->Database."\n");
                 $database = $schema->Database;
                 $sql = "DROP DATABASE $database";
                 $sth = $this->db->dbh->prepare($sql);
@@ -84,6 +89,7 @@ class DatabaseManager{
             if(strpos($file, '.sql') !== false){
                 $fileparts = explode("-", $file);
                 echo "Creating schema for ".$fileparts[0]."\n";
+                $this->app->log("Creating schema for ".$fileparts[0]."\n");
                 if(!in_array($fileparts[0], array("information_schema", "mysql", "performance_schema"))){
                     $sql = "CREATE DATABASE ".$fileparts[0];
                     $sth = $this->db->dbh->prepare($sql);
@@ -97,11 +103,14 @@ class DatabaseManager{
 
                     $command=CONFIG['mysqlexe'].'mysql -h' .$mysqlHostName .' -u' .$mysqlUserName .' ' .$mysqlDatabaseName .' < ' .$mysqlImportFilename;
                     exec($command,$output,$worked);
+                    $this->app->log("$command,$output,$worked");
                     switch($worked){
                         case 0:
+                            $this->app->log('The data from the file <b>' .$mysqlImportFilename .'</b> were successfully imported into the database <b>' .$mysqlDatabaseName .'</b>');
                             echo 'The data from the file <b>' .$mysqlImportFilename .'</b> were successfully imported into the database <b>' .$mysqlDatabaseName .'</b>';
                             break;
                         case 1:
+                            $this->app->log('An error occurred during the import. Please check if the file is in the same folder as this script. Also check the following data again:<br/><br/><table><tr><td>MySQL Database Name:</td><td><b>' .$mysqlDatabaseName .'</b></td></tr><tr><td>MySQL User Name:</td><td><b>' .$mysqlUserName .'</b></td></tr><tr><td>MySQL Password:</td><td><b>NOTSHOWN</b></td></tr><tr><td>MySQL Host Name:</td><td><b>' .$mysqlHostName .'</b></td></tr><tr><td>MySQL Import Dateiname:</td><td><b>' .$mysqlImportFilename .'</b></td></tr></table>');
                             echo 'An error occurred during the import. Please check if the file is in the same folder as this script. Also check the following data again:<br/><br/><table><tr><td>MySQL Database Name:</td><td><b>' .$mysqlDatabaseName .'</b></td></tr><tr><td>MySQL User Name:</td><td><b>' .$mysqlUserName .'</b></td></tr><tr><td>MySQL Password:</td><td><b>NOTSHOWN</b></td></tr><tr><td>MySQL Host Name:</td><td><b>' .$mysqlHostName .'</b></td></tr><tr><td>MySQL Import Dateiname:</td><td><b>' .$mysqlImportFilename .'</b></td></tr></table>';
                             break;
                     }

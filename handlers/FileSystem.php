@@ -8,11 +8,13 @@ class FileSystem
     public $name;
     public $size;
     public $filepath;
+    private $app;
 
-    public function __construct($filepath = "")
+    public function __construct($filepath = "", $app)
     {
         $this->filepath = $filepath;
         $this->setName(basename($this->filepath));
+        $this->app = $app;
     }
 
     public function fileExists($source){
@@ -208,6 +210,7 @@ class FileSystem
         $files = array_diff($allFiles, array('.', '..'));
         foreach($files as $file){
             echo "deleting $this->filepath$file \n";
+            $this->app->log("deleting $this->filepath$file \n");
             unlink($this->filepath.$file);
         }
         //unlink($mysqlImportFilename);
