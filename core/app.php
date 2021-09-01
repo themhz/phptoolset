@@ -32,6 +32,9 @@ class App
     public function __construct($rootpath)
     {
         $this->rootpath = $rootpath;
+        //echo __DIR__;
+//        echo $this->rootpath.'\phptoolset\logs\log_'.date("j.n.Y").'.log';
+//        die();
 
     }
 
@@ -130,7 +133,7 @@ class App
     }
 
     public function log($log){
-        file_put_contents('./logs/log_'.date("j.n.Y").'.log', $log, FILE_APPEND);
+        file_put_contents($this->rootpath.'\phptoolset\logs\log_'.date("j.n.Y").'.log', $log, FILE_APPEND);
 
     }
 
