@@ -24,16 +24,20 @@ use \DateTime;
 //This class uses singleton method to access the database used by the application
 class Database
 {
-    public $dbh;
     private static $instance;
+    public $user;
+    public $password;
+    public $dbhost;
+    public $basename = null;
+    public $dbh;
 
     private function __construct()
     {        
-        $user = CONFIG['db.user'];    
-        $password = CONFIG['db.password'];
-        $dbhost = CONFIG['db.host'];
-        $basename = CONFIG['db.name'];
-        $this->dbh = new PDO("mysql:host=$dbhost;dbname=$basename", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;",PDO::ATTR_PERSISTENT => true));
+        $this->user = CONFIG['db.user'];
+        $this->password = CONFIG['db.password'];
+        $this->dbhost = CONFIG['db.host'];
+        $this->basename = $this->getBaseName();
+        $this->dbh = new PDO("mysql:host=$this->dbhost;dbname=$this->basename", $this->user, $this->password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;",PDO::ATTR_PERSISTENT => true));
 
         // $now = new DateTime();
         // $mins = $now->getOffset() / 60;
@@ -47,13 +51,28 @@ class Database
         $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    public function setBaseName($basename=CONFIG['db.name']){
+        $this->basename = $basename;
+        $this->dbh = new PDO("mysql:host=$this->dbhost;dbname=$this->basename", $this->user, $this->password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;",PDO::ATTR_PERSISTENT => true));
+        $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+
+    public function getBaseName(){
+        if($this->basename == null){
+            return CONFIG['db.name'];
+        }else{
+            return $this->basename;
+        }
+    }
     public static function getInstance()
     {
+
         if (!isset(self::$instance))
         {
             $object = __CLASS__;
             self::$instance = new $object;
         }
+
         return self::$instance;
     }
 }

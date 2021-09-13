@@ -1,0 +1,78 @@
+Doing backup  
+deleting C:\wamp64\www\phptoolset\database\dumps\despoina-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\development_db-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\erg3_theotokatos-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\fcm_api-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\fcmsoft-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\fcmsoft_admin-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\fcmsoft_db-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\fightclubmanager-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\moodle-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\mywebshop-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\performance-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\portalvacation-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\samplewebapp-20210909_08_30_03.sql 
+deleting C:\wamp64\www\phptoolset\database\dumps\test-20210909_08_30_03.sql 
+./despoina-20210909_08_30_03.sql deleted successful
+./development_db-20210909_08_30_03.sql deleted successful
+./erg3_theotokatos-20210909_08_30_03.sql deleted successful
+./fcm_api-20210909_08_30_03.sql deleted successful
+./fcmsoft-20210909_08_30_03.sql deleted successful
+./fcmsoft_admin-20210909_08_30_03.sql deleted successful
+./fcmsoft_db-20210909_08_30_03.sql deleted successful
+./fightclubmanager-20210909_08_30_03.sql deleted successful
+./moodle-20210909_08_30_03.sql deleted successful
+./mywebshop-20210909_08_30_03.sql deleted successful
+./performance-20210909_08_30_03.sql deleted successful
+./portalvacation-20210909_08_30_03.sql deleted successful
+./samplewebapp-20210909_08_30_03.sql deleted successful
+./test-20210909_08_30_03.sql deleted successful
+backing up despoina
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\despoina-20210911_08_30_02.sql despoina 
+backing up development_db
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\development_db-20210911_08_30_02.sql development_db 
+backing up erg3_theotokatos
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\erg3_theotokatos-20210911_08_30_02.sql erg3_theotokatos 
+backing up fcm_api
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\fcm_api-20210911_08_30_02.sql fcm_api 
+backing up fcmsoft
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\fcmsoft-20210911_08_30_02.sql fcmsoft 
+backing up fcmsoft_admin
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\fcmsoft_admin-20210911_08_30_02.sql fcmsoft_admin 
+backing up fcmsoft_db
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\fcmsoft_db-20210911_08_30_02.sql fcmsoft_db 
+backing up fightclubmanager
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\fightclubmanager-20210911_08_30_02.sql fightclubmanager 
+backing up information_schema
+backing up kipodomi
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\kipodomi-20210911_08_30_02.sql kipodomi 
+backing up moodle
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\moodle-20210911_08_30_02.sql moodle 
+backing up mysql
+backing up mywebshop
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\mywebshop-20210911_08_30_02.sql mywebshop 
+backing up performance
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\performance-20210911_08_30_02.sql performance 
+backing up performance_schema
+backing up portalvacation
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\portalvacation-20210911_08_30_02.sql portalvacation 
+backing up samplewebapp
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\samplewebapp-20210911_08_30_02.sql samplewebapp 
+backing up test
+C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=C:\wamp64\www\phptoolset\database\dumps\test-20210911_08_30_02.sql test 
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\despoina-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\development_db-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\erg3_theotokatos-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\fcm_api-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\fcmsoft-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\fcmsoft_admin-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\fcmsoft_db-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\fightclubmanager-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\kipodomi-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\moodle-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\mywebshop-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\performance-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\portalvacation-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\samplewebapp-20210911_08_30_02.sql
+successfully uploaded C:\wamp64\www\phptoolset\database\dumps\test-20210911_08_30_02.sql
+--------------------------end backup-----------------------
