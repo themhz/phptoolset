@@ -123,21 +123,16 @@ function insertProductsToDb($db, $id, $sku, $name, $description, $price, $stock,
 
 }
 
-
 //insert product images in custom database
 function insertProductImagesToDb($db, $id, $image, $order){
-
     $db->setBaseName("mywebshop");
     $sql = "insert into product_images (product_id, image, `order`, regdate)  
             values (:id, :image, :order, :regdate)";
     $date = new \DateTime();
     $sth = $db->dbh->prepare($sql);
     $sth->execute(array(':id' => $id,
-        ':image' => $image,
-        ':order' => $order,
-        ':regdate' => $date->format('Y-m-d-H')
-
+                        ':image' => $image,
+                        ':order' => $order,
+                        ':regdate' => $date->format('Y-m-d-H')
     ));
-
-
 }

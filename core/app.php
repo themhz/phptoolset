@@ -114,6 +114,25 @@ class App
                         }
                     }
                     break;
+                case 'virtuemart':
+                    if(!empty($argv[2])) {
+                        switch ($argv[2]) {
+                            case 'images':
+                                switch ($argv[3]) {
+                                    case 'copy':
+                                        echo "from ".$argv[4]. " to ". $argv[5];
+                                        $xamp = new Xamp();
+                                        $xamp->backup($argv[4], $argv[5], $this);
+                                        break;
+                                }
+//                                echo 'doing apache files backup';
+//                                $xamp = new Xamp();
+//                                $xamp->backup("C:\\xampp\\htdocs", "C:\\Users\\themhz\\Documents\\codebase\\", $this);
+
+                                break;
+                        }
+                    }
+                    break;
                 default:
                     $this->showmenu();
             }
