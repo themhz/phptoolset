@@ -2,7 +2,7 @@
 require("../handlers/Ftp.php");
 
 $ftp = new Ftp("ftp.fcmsoft.com");
-$dir    = 'C:\wamp64\www\phptoolset\database\dumps\\';
+$dir    = 'C:\xampp\htdocs\phptoolset\database\dumps\\';
 $files = scandir($dir);
 
 foreach ($files as $file) {

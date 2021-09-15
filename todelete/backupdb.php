@@ -19,7 +19,7 @@ foreach($results as $schema){
     echo "backing up ".$schema->Database."\n";
     $database = $schema->Database;
     if(!in_array($database, array("information_schema", "mysql", "performance_schema"))){
-        exec("C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysqldump --user=root --password= --result-file=\"C:\\wamp64\www\phptoolset\\database\\dumps\\".$database."-".$date->format('Ymd_H_i_s').".sql\" $schema->Database");
+        exec("C:\\xampp\\mysql\\bin\\mysqldump --user=root --password= --result-file=\"C:\\xampp\\htdocs\\phptoolset\\database\\dumps\\".$database."-".$date->format('Ymd_H_i_s').".sql\" $schema->Database");
     }
 }
 

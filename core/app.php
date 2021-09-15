@@ -22,7 +22,7 @@ namespace phptools\core;
 use phptools\handlers\FileSystem;
 use phptools\handlers\Ftp;
 use phptools\handlers\DatabaseManager;
-use phptools\handlers\Wamp;
+use phptools\handlers\Xamp;
 
 class App
 {
@@ -102,13 +102,14 @@ class App
                         $this->showdatabasemenu();
                     }
                     break;
-                case 'wamp':
+                case 'xamp':
                     if(!empty($argv[2])) {
                         switch ($argv[2]) {
                             case 'backup':
-                                echo 'doing wamp backup';
-                                $wamp = new Wamp();
-                                $wamp->backup("C:\\wamp64\\www", "C:\\Users\\themhz\\Documents\\codebase\\", $this);
+                                echo 'doing apache files backup';
+                                $xamp = new Xamp();
+                                $xamp->backup("C:\\xampp\\htdocs", "C:\\Users\\themhz\\Documents\\codebase\\", $this);
+
                                 break;
                         }
                     }

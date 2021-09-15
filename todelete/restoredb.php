@@ -13,7 +13,7 @@ $dbhost = CONFIG['db.host'];
 $dbh = new PDO("mysql:host=$dbhost;dbname=", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;",PDO::ATTR_PERSISTENT => true));
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$dir    = 'C:\wamp64\www\phptoolset\database\dumps\\';
+$dir    = 'C:\xampp\htdocs\phptoolset\database\dumps\\';
 $files1 = scandir($dir);
 
 foreach ($files1 as $file){
@@ -32,7 +32,7 @@ foreach ($files1 as $file){
             $mysqlHostName ='localhost';
             $mysqlImportFilename =$dir.$file;
 
-            $command='C:\wamp64\bin\mariadb\mariadb10.4.10\bin\mysql -h' .$mysqlHostName .' -u' .$mysqlUserName .' ' .$mysqlDatabaseName .' < ' .$mysqlImportFilename;
+            $command='C:\xampp\mysql\bin\mysql -h' .$mysqlHostName .' -u' .$mysqlUserName .' ' .$mysqlDatabaseName .' < ' .$mysqlImportFilename;
             exec($command,$output,$worked);
             switch($worked){
                 case 0:
