@@ -23,6 +23,8 @@ use phptools\handlers\FileSystem;
 use phptools\handlers\Ftp;
 use phptools\handlers\DatabaseManager;
 use phptools\handlers\Xamp;
+use phptools\joomla\VirtuemartShopExport;
+
 
 class App
 {
@@ -115,6 +117,7 @@ class App
                     }
                     break;
                 case 'virtuemart':
+                    //php index.php virtuemart images copy "C:\Users\themhz\Downloads\category\product" "C:\xampp\htdocs\mywebshop\userfiles\products\"
                     if(!empty($argv[2])) {
                         switch ($argv[2]) {
                             case 'images':
@@ -125,10 +128,19 @@ class App
                                         $xamp->backup($argv[4], $argv[5], $this);
                                         break;
                                 }
-//                                echo 'doing apache files backup';
-//                                $xamp = new Xamp();
-//                                $xamp->backup("C:\\xampp\\htdocs", "C:\\Users\\themhz\\Documents\\codebase\\", $this);
+                                break;
+                            case 'products':
+                                switch ($argv[3]) {
+                                    case 'get':
+                                        $vm = new VirtuemartShopExport("kipodomi", "mywebshop");
+                                        //print_r($vm->getSourceDbProducts());
+                                        $vm->copySourceDbProductsToDestinationDb();
+//                                        echo "from ".$argv[4]. " to ". $argv[5];
+//                                        $xamp = new Xamp();
+//                                        $xamp->backup($argv[4], $argv[5], $this);
 
+                                        break;
+                                }
                                 break;
                         }
                     }
