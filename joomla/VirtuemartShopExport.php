@@ -29,9 +29,10 @@ class VirtuemartShopExport
 
     public function getSrouceDbCategories(){
         $sql = "
-            SELECT a.category_child_id as id, a.category_parent_id as parent_id , b.category_name as `name`
+            SELECT a.category_child_id as id, a.category_parent_id as parent_id , b.category_name as `name`, c.published
             FROM kipodomi.kipodo_virtuemart_category_categories a
-            inner join kipodomi.kipodo_virtuemart_categories_el_gr b on a.category_child_id = b.virtuemart_category_id
+            inner join kipodomi.kipodo_virtuemart_categories_el_gr b on a.category_child_id = b.virtuemart_category_id            
+            inner join kipodomi.kipodo_virtuemart_categories c on c.virtuemart_category_id = a.category_child_id
             order by a.category_child_id;
             ";
         $this->db->setBaseName($this->sourceDb);
@@ -139,15 +140,16 @@ class VirtuemartShopExport
     public function insertDestinationCategories($results){
 
         foreach($results as $item){
-            $sql = "insert into categories (id, parent_id, name)  
-            values (:id, :parent_id, :name)";
+            $sql = "insert into categories (id, parent_id, name, published)  
+            values (:id, :parent_id, :name, :published)";
 
             $this->db->setBaseName($this->destinationDb);
             $sth = $this->db->dbh->prepare($sql);
             try{
                 $sth->execute(array(':id' => $item->id,
                     ':parent_id' => $item->parent_id,
-                    ':name' => $item->name
+                    ':name' => $item->name,
+                    ':published' => $item->published
                 ));
             }catch(\Exception $e){
                 echo 'Trying to insert '.$item->id.' from insertDestinationCategories, but Caught exception: '."\n";
