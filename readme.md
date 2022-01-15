@@ -16,4 +16,5 @@ Commands you can use from the command line
 
 
 Command you can use to backup xamp
-1. php index.php xamp backup
+1. php index.php xamp backup //backs the files
+2. php index.php xamp fullbackup //backs the files and the databases
