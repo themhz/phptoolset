@@ -12,3 +12,8 @@ Commands you can use from the command line
 5. php index.php database deleteremote  //delete all the remote files  
 6. php index.php database deletelocal  //delete all the local files  
 7. php index.php database backup  //run all the basic flow  
+
+
+
+Command you can use to backup xamp
+1. php index.php xamp backup

@@ -105,13 +105,33 @@ class App
                     }
                     break;
                 case 'xamp':
-                    if(!empty($argv[2])) {
+                    if(!empty($argv[2])) {                        
                         switch ($argv[2]) {
                             case 'backup':
                                 echo 'doing apache files backup';
                                 $xamp = new Xamp();
                                 $xamp->backup("C:\\xampp\\htdocs", "C:\\Users\\themhz\\Documents\\codebase\\", $this);
 
+                                break;
+                            case 'fullbackup':
+                                
+                                $xamp = new Xamp();
+                                $xamp->backup("C:\\xampp\\htdocs", "C:\\Users\\themhz\\Documents\\codebase\\", $this);
+
+                                $this->log("--------------------------end apache files backup-----------------------\n");
+                                
+                                $this->log("Doing backup  \n");
+                                $fileSystem = new FileSystem(CONFIG['dumpfiles'], $this);
+                                $fileSystem->dirdelete();
+                                $ftp= new Ftp(CONFIG['ftp.host'], $this);
+                                $ftp->deleteRemoteFiles();
+
+                                $dbManager->exportDumps();
+                                $dbManager->uploadToFtp();
+                                $this->log("--------------------------end database backup-----------------------\n");
+
+
+                                $this->log("--------------------------end full backup-----------------------\n");
                                 break;
                         }
                     }
@@ -165,6 +185,8 @@ class App
     }
 
     public function log($log){
+
+        echo $log;
         file_put_contents($this->rootpath.'\phptoolset\logs\log_'.date("j.n.Y").'.log', $log, FILE_APPEND);
 
     }
