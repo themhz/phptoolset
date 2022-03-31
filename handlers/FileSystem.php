@@ -10,7 +10,7 @@ class FileSystem
     public $filepath;
     private $app;
 
-    public function __construct($filepath = "", $app)
+    public function __construct($filepath, $app)
     {
         $this->filepath = $filepath;
         $this->setName(basename($this->filepath));

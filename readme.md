@@ -14,7 +14,6 @@ Commands you can use from the command line
 7. php index.php database backup  //run all the basic flow  
 
 
-
 Command you can use to backup xamp
 1. php index.php xamp backup //backs the files
 2. php index.php xamp fullbackup //backs the files and the databases
