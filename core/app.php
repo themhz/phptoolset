@@ -60,8 +60,15 @@ class App
                     if(!empty($argv[2])){
                         switch ($argv[2]){
                             case 'export':
-                                $dbManager->exportDumps();
-                                echo 'doing export';
+                                if(!empty($argv[3])){
+                                    if($argv[3] =="all"){
+                                        $dbManager->exportDumps();
+                                        echo 'doing export';
+                                    }else{
+                                        $dbManager->exportDB($argv[3]);
+                                        echo 'doing export on '.$argv[3];
+                                    }
+                                }
                                 break;
                             case 'drop':
                                 echo "doing drop..\n";

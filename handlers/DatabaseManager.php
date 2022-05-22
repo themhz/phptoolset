@@ -59,6 +59,12 @@ class DatabaseManager{
 
     }
 
+    public function exportDB($database){
+        $date = new \DateTime();
+        $location = CONFIG["dumpfiles"];
+        exec(CONFIG["mysqlexe"]."mysqldump --user=root --password= --result-file=$location".$database."-".$date->format('Ymd_H_i_s').".sql ".$database);
+    }
+
     public function dropTables(){
 
         $sql = "SHOW DATABASES";

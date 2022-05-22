@@ -5,7 +5,8 @@ Contains some primitive handlers like database, ftp and local file management.
 
 Commands you can use from the command line 
 
-1. php index.php database export  //To export all the database dump  
+1. php index.php database export all //To export all the database dump  
+1. php index.php database export dbname //To export all the database dbname dump  
 2. php index.php database drop //To Drop all the schemas from the database  
 3. php index.php database restore  //Restore all the tables to the database  
 4. php index.php database upload  //Upload yous backups to the database  
