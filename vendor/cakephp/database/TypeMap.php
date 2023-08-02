@@ -22,29 +22,29 @@ namespace Cake\Database;
 class TypeMap
 {
     /**
-     * Associative array with the default fields and the related types this query might contain.
+     * Array with the default fields and the related types this query might contain.
      *
      * Used to avoid repetition when calling multiple functions inside this class that
      * may require a custom type for a specific field.
      *
-     * @var string[]
+     * @var array<int|string, string>
      */
     protected $_defaults = [];
 
     /**
-     * Associative array with the fields and the related types that override defaults this query might contain
+     * Array with the fields and the related types that override defaults this query might contain
      *
      * Used to avoid repetition when calling multiple functions inside this class that
      * may require a custom type for a specific field.
      *
-     * @var string[]
+     * @var array<int|string, string>
      */
     protected $_types = [];
 
     /**
      * Creates an instance with the given defaults
      *
-     * @param string[] $defaults The defaults to use.
+     * @param array<int|string, string> $defaults The defaults to use.
      */
     public function __construct(array $defaults = [])
     {
@@ -69,7 +69,7 @@ class TypeMap
      * This method will replace all the existing default mappings with the ones provided.
      * To add into the mappings use `addDefaults()`.
      *
-     * @param string[] $defaults Associative array where keys are field names and values
+     * @param array<int|string, string> $defaults Array where keys are field names / positions and values
      * are the correspondent type.
      * @return $this
      */
@@ -83,7 +83,7 @@ class TypeMap
     /**
      * Returns the currently configured types.
      *
-     * @return string[]
+     * @return array<int|string, string>
      */
     public function getDefaults(): array
     {
@@ -95,7 +95,7 @@ class TypeMap
      *
      * If a key already exists it will not be overwritten.
      *
-     * @param string[] $types The additional types to add.
+     * @param array<int|string, string> $types The additional types to add.
      * @return void
      */
     public function addDefaults(array $types): void
@@ -114,7 +114,7 @@ class TypeMap
      *
      * This method will replace all the existing type maps with the ones provided.
      *
-     * @param string[] $types Associative array where keys are field names and values
+     * @param array<int|string, string> $types Array where keys are field names / positions and values
      * are the correspondent type.
      * @return $this
      */
@@ -128,7 +128,7 @@ class TypeMap
     /**
      * Gets a map of fields and their associated types for single-use.
      *
-     * @return string[]
+     * @return array<int|string, string>
      */
     public function getTypes(): array
     {
@@ -145,20 +145,13 @@ class TypeMap
      */
     public function type($column): ?string
     {
-        if (isset($this->_types[$column])) {
-            return $this->_types[$column];
-        }
-        if (isset($this->_defaults[$column])) {
-            return $this->_defaults[$column];
-        }
-
-        return null;
+        return $this->_types[$column] ?? $this->_defaults[$column] ?? null;
     }
 
     /**
      * Returns an array of all types mapped types
      *
-     * @return string[]
+     * @return array<int|string, string>
      */
     public function toArray(): array
     {

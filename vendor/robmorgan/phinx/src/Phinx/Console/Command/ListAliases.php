@@ -8,9 +8,11 @@
 namespace Phinx\Console\Command;
 
 use Phinx\Util\Util;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'list:aliases')]
 class ListAliases extends AbstractCommand
 {
     /**
@@ -36,7 +38,6 @@ class ListAliases extends AbstractCommand
      *
      * @param \Symfony\Component\Console\Input\InputInterface $input Input
      * @param \Symfony\Component\Console\Output\OutputInterface $output Output
-     *
      * @return int 0 on success
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -62,7 +63,8 @@ class ListAliases extends AbstractCommand
                         array_keys($aliases),
                         $aliases
                     )
-                )
+                ),
+                $this->verbosityLevel
             );
         } else {
             $output->writeln(

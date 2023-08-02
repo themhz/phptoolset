@@ -10,7 +10,8 @@
     },
     "require": {
         "robmorgan/phinx": "^0.12.7",
-        "google/apiclient": "2.10"
+        "google/apiclient": "^2.10.0",
+        "php": "^8.0"
     },
     "scripts": {
         "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
@@ -21,4 +22,6 @@
             "YouTube"
         ]
     }
+
+
 }

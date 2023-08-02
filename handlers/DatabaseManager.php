@@ -62,7 +62,14 @@ class DatabaseManager{
     public function exportDB($database){
         $date = new \DateTime();
         $location = CONFIG["dumpfiles"];
-        exec(CONFIG["mysqlexe"]."mysqldump --user=root --password= --result-file=$location".$database."-".$date->format('Ymd_H_i_s').".sql ".$database);
+        //die(CONFIG["mysqlexe"]."mysqldump --user=root --password= --result-file=$location".$database."-".$date->format('Ymd_H_i_s').".sql ".$database);
+        exec(CONFIG["mysqlexe"]."mysqldump --user=".CONFIG["db.user"]." --password=".CONFIG["db.password"]." --result-file=$location".$database."-".$date->format('Ymd_H_i_s').".sql ".$database);
+    }
+
+    public function exportSchema($database){
+        $date = new \DateTime();
+        $location = CONFIG["dumpfiles"];
+        exec(CONFIG["mysqlexe"]."mysqldump --no-data --user=".CONFIG["db.user"]." --password=".CONFIG["db.password"]." --result-file=$location".$database."-".$date->format('Ymd_H_i_s').".sql ".$database);
     }
 
     public function dropTables(){

@@ -62,11 +62,22 @@ class App
                             case 'export':
                                 if(!empty($argv[3])){
                                     if($argv[3] =="all"){
-                                        $dbManager->exportDumps();
-                                        echo 'doing export';
+                                        if(isset($argv[4]) && $argv[4] == "schema"){
+                                            echo 'No implementaton yet';
+                                        }else{
+                                            echo 'doing export';
+                                            $dbManager->exportDumps();
+                                        }
+
                                     }else{
-                                        $dbManager->exportDB($argv[3]);
-                                        echo 'doing export on '.$argv[3];
+                                        if(isset($argv[4]) && $argv[4] == "schema"){
+                                            echo 'doing export on '.$argv[3];
+                                            $dbManager->exportSchema($argv[3]);
+                                        }else{
+                                            echo 'doing export on '.$argv[3];
+                                            $dbManager->exportDB($argv[3]);
+                                        }
+
                                     }
                                 }
                                 break;

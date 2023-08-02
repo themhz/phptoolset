@@ -30,7 +30,7 @@ class QueryLogger extends BaseLog
     /**
      * Constructor.
      *
-     * @param array $config Configuration array
+     * @param array<string, mixed> $config Configuration array
      */
     public function __construct(array $config = [])
     {
@@ -52,6 +52,6 @@ class QueryLogger extends BaseLog
             $context = $context['query']->getContext() + $context;
             $message = 'connection={connection} duration={took} rows={numRows} ' . $message;
         }
-        Log::write('debug', $message, $context);
+        Log::write('debug', (string)$message, $context);
     }
 }

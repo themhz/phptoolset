@@ -2,7 +2,7 @@
 
 <dl>
   <dt>Homepage</dt><dd><a href="http://www.github.com/google/google-auth-library-php">http://www.github.com/google/google-auth-library-php</a></dd>
-  <dt>Reference Docs</dt><dd><a href="https://googleapis.github.io/google-auth-library-php/master/">https://googleapis.github.io/google-auth-library-php/master/</a></dd>
+  <dt>Reference Docs</dt><dd><a href="https://googleapis.github.io/google-auth-library-php/main/">https://googleapis.github.io/google-auth-library-php/main/</a></dd>
   <dt>Authors</dt>
     <dd><a href="mailto:temiola@google.com">Tim Emiola</a></dd>
     <dd><a href="mailto:stanleycheung@google.com">Stanley Cheung</a></dd>
@@ -59,7 +59,7 @@ Once downloaded, store the path to this file in the
 `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 
 ```php
-putenv('GOOGLE_APPLICATION_CREDENTIALS=/path/to/my/client_credentials.json');
+putenv('GOOGLE_APPLICATION_CREDENTIALS=/path/to/my/credentials.json');
 ```
 
 > PHP's `putenv` function is just one way to set an environment variable.
@@ -83,7 +83,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 
 // specify the path to your application credentials
-putenv('GOOGLE_APPLICATION_CREDENTIALS=/path/to/my/client_credentials.json');
+putenv('GOOGLE_APPLICATION_CREDENTIALS=/path/to/my/credentials.json');
 
 // define the scopes for your API call
 $scopes = ['https://www.googleapis.com/auth/drive.readonly'];
@@ -136,7 +136,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 
 // specify the path to your application credentials
-putenv('GOOGLE_APPLICATION_CREDENTIALS=/path/to/my/client_credentials.json');
+putenv('GOOGLE_APPLICATION_CREDENTIALS=/path/to/my/credentials.json');
 
 // Provide the ID token audience. This can be a Client ID associated with an IAP application,
 // Or the URL associated with a CloudRun App
@@ -175,7 +175,7 @@ used when you set up your protected resource as the target audience. See how to
 #### Call using a specific JSON key
 If you want to use a specific JSON key instead of using `GOOGLE_APPLICATION_CREDENTIALS` environment variable, you can
  do this:
- 
+
 ```php
 use Google\Auth\CredentialsLoader;
 use Google\Auth\Middleware\AuthTokenMiddleware;
@@ -216,10 +216,10 @@ print_r((string) $response->getBody());
 
 #### Call using Proxy-Authorization Header
 If your application is behind a proxy such as [Google Cloud IAP][iap-proxy-header],
-and your application occupies the `Authorization` request header, 
-you can include the ID token in a `Proxy-Authorization: Bearer` 
-header instead. If a valid ID token is found in a `Proxy-Authorization` header, 
-IAP authorizes the request with it. After authorizing the request, IAP passes 
+and your application occupies the `Authorization` request header,
+you can include the ID token in a `Proxy-Authorization: Bearer`
+header instead. If a valid ID token is found in a `Proxy-Authorization` header,
+IAP authorizes the request with it. After authorizing the request, IAP passes
 the Authorization header to your application without processing the content.
 For this, use the static method `getProxyIdTokenMiddleware` on
 `ApplicationDefaultCredentials`.
@@ -230,7 +230,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 
 // specify the path to your application credentials
-putenv('GOOGLE_APPLICATION_CREDENTIALS=/path/to/my/client_credentials.json');
+putenv('GOOGLE_APPLICATION_CREDENTIALS=/path/to/my/credentials.json');
 
 // Provide the ID token audience. This can be a Client ID associated with an IAP application
 //    $targetAudience = 'IAP_CLIENT_ID.apps.googleusercontent.com';
@@ -305,8 +305,8 @@ about the client or APIs on [StackOverflow](http://stackoverflow.com).
 
 [google-apis-php-client]: https://github.com/google/google-api-php-client
 [application default credentials]: https://developers.google.com/accounts/docs/application-default-credentials
-[contributing]: https://github.com/google/google-auth-library-php/tree/master/.github/CONTRIBUTING.md
-[copying]: https://github.com/google/google-auth-library-php/tree/master/COPYING
+[contributing]: https://github.com/google/google-auth-library-php/tree/main/.github/CONTRIBUTING.md
+[copying]: https://github.com/google/google-auth-library-php/tree/main/COPYING
 [Guzzle]: https://github.com/guzzle/guzzle
 [Guzzle 5]: http://docs.guzzlephp.org/en/5.3
 [developer console]: https://console.developers.google.com

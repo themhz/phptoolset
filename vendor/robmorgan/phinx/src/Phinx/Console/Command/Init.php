@@ -9,11 +9,13 @@ namespace Phinx\Console\Command;
 
 use InvalidArgumentException;
 use RuntimeException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'init')]
 class Init extends Command
 {
     protected const FILE_NAME = 'phinx';
@@ -61,7 +63,6 @@ class Init extends Command
      *
      * @param \Symfony\Component\Console\Input\InputInterface $input Interface implemented by all input classes.
      * @param \Symfony\Component\Console\Output\OutputInterface $output Interface implemented by all output classes.
-     *
      * @return int 0 on success
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -80,9 +81,7 @@ class Init extends Command
      *
      * @param \Symfony\Component\Console\Input\InputInterface $input Interface implemented by all input classes.
      * @param string $format Format to resolve for
-     *
      * @throws \InvalidArgumentException
-     *
      * @return string
      */
     protected function resolvePath(InputInterface $input, $format)
@@ -133,10 +132,8 @@ class Init extends Command
      *
      * @param string $path Config file's path.
      * @param string $format Format to use for config file
-     *
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     *
      * @return void
      */
     protected function writeConfig($path, $format = AbstractCommand::FORMAT_DEFAULT)
